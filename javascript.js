@@ -1,18 +1,25 @@
-const container = document.querySelector('.container');
+const container = document.querySelector('.grid-container');
+const redrawBtn = document.querySelector('.redraw-btn');
+const restartBtn = document.querySelector('.restart-btn');
 
 
-// creates a grid of 16x16 divs
-function createGrid() {
+createGrid(16,16);
 
-    for(let i=0;i<16;i++){
+restartBtn.addEventListener('click',restartGrid);
+redrawBtn.addEventListener('click',redrawGrid);
+
+
+// creates a grid of 16x16 divs 
+function createGrid(rows,columns) {
+
+    for(let i=0;i<rows;i++){
 
         const rowContainer = document.createElement('div');
         rowContainer.classList.add('row-container');
 
-            for(let j=0;j<16;j++){
+            for(let j=0;j<columns;j++){
                 const box = document.createElement('div');
                 box.classList.add('box');
-                //box.addEventListener('mouseover',colorBox);
                 colorBox(box);
                 rowContainer.appendChild(box);           
             }  
@@ -25,17 +32,40 @@ function createGrid() {
 }
 
 function colorBox(element) {
-    //e.target.classList.add('colored');
-    element.addEventListener('mouseover', (e) => e.target.classList.add('colored') );
- 
+
+    element.addEventListener('mouseover', (e) => e.target.classList.add('colored') ); 
+
+}
+
+function redrawGrid() {
+
+    let rows = prompt('Number of rows');
+    let columns = prompt('Number of columns');
+
+    cleanGrid();
+    createGrid(rows,columns);
+
 }
 
 
-function changeColor(element){
-    element.style.backgroundColor='pink';
+function cleanGrid() {
+    const gridRows =document.querySelectorAll('.row-container');
+    
+    gridRows.forEach(row => {
+        row.remove();
+    });
 }
 
-createGrid();
+function restartGrid() {
+    const coloredBoxes = document.querySelectorAll('.colored');   
+    coloredBoxes.forEach((box) => box.classList.remove('colored'));
+}
+
+
+
+
+
+
 
 
 
