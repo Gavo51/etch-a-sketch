@@ -39,9 +39,15 @@ function colorBox(element) {
 
 function redrawGrid() {
 
-    let rows = prompt('Number of rows');
-    let columns = prompt('Number of columns');
+let rows = 0;
+let columns = 0;
+ 
+    do {  
+        rows = prompt('Enter number of rows (between 1 and 100):');
+        columns = prompt('Enter number of columns (between 1 and 100):');
+    } while (rows <1 || columns<1 || rows>100 || columns>100);
 
+       
     cleanGrid();
     createGrid(rows,columns);
 
