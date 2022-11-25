@@ -2,8 +2,7 @@ const container = document.querySelector('.grid-container');
 const redrawBtn = document.querySelector('.redraw-btn');
 const restartBtn = document.querySelector('.restart-btn');
 
-
-createGrid(16,16);
+createGrid(4,4);
 
 restartBtn.addEventListener('click',restartGrid);
 redrawBtn.addEventListener('click',redrawGrid);
@@ -20,7 +19,7 @@ function createGrid(rows,columns) {
             for(let j=0;j<columns;j++){
                 const box = document.createElement('div');
                 box.classList.add('box');
-                colorBox(box);
+                //colorBox(box);
                 rowContainer.appendChild(box);           
             }  
 
@@ -28,12 +27,25 @@ function createGrid(rows,columns) {
                  
     }
 
+    colorBox();
+
     return;
 }
 
-function colorBox(element) {
 
-    element.addEventListener('mouseover', (e) => e.target.classList.add('colored') ); 
+function generateColor () {
+
+    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+    return randomColor;
+}
+
+function colorBox() {
+
+    let boxes = document.querySelectorAll('.box');
+    boxes.forEach(box => {
+
+        box.addEventListener('mouseover', ()=> box.classList.add('colored'));
+    });
 
 }
 
