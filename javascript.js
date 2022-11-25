@@ -2,21 +2,21 @@ const container = document.querySelector('.grid-container');
 const redrawBtn = document.querySelector('.redraw-btn');
 const restartBtn = document.querySelector('.restart-btn');
 
-createGrid(4,4);
+createGrid(16);
 
 restartBtn.addEventListener('click',restartGrid);
 redrawBtn.addEventListener('click',redrawGrid);
 
 
 // creates a grid of 16x16 divs 
-function createGrid(rows,columns) {
+function createGrid(gridSize) {
 
-    for(let i=0;i<rows;i++){
+    for(let i=0;i<gridSize;i++){
 
         const rowContainer = document.createElement('div');
         rowContainer.classList.add('row-container');
 
-            for(let j=0;j<columns;j++){
+            for(let j=0;j<gridSize;j++){
                 const box = document.createElement('div');
                 box.classList.add('box');
                 //colorBox(box);
@@ -51,17 +51,14 @@ function colorBox() {
 
 function redrawGrid() {
 
-let rows = 0;
-let columns = 0;
+let gridSize=0;
  
     do {  
-        rows = prompt('Enter number of rows (between 1 and 100):');
-        columns = prompt('Enter number of columns (between 1 and 100):');
-    } while (rows <1 || columns<1 || rows>100 || columns>100);
-
+        gridSize = prompt('Enter a number between 1 and 100:');   
+    } while (gridSize<1 || gridSize>100);
        
     cleanGrid();
-    createGrid(rows,columns);
+    createGrid(gridSize);
 
 }
 
